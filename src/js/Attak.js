@@ -14,7 +14,7 @@ export default class attackCalc {
     }
   
     get attack() {
-      return this._attack;
+      this._attack = Math.floor(attack * attackLineRatio);
     }
   
     set attack(attack) {
@@ -24,7 +24,7 @@ export default class attackCalc {
         this._attack = Math.floor((attack * attackLineRatio) - attackLogAdj); 
       }
       else {
-        this._attack = Math.floor(attack* attackLineRatio);
+        return this._attack;  
       }
       return this._attack
     }
