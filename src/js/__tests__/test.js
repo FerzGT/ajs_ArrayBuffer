@@ -1,11 +1,9 @@
-import attackCalc from '../Attak'
+import attackCalc from '../Attak.js'
 
 test('attack is calculated according to distance impact', () => {
   const Magician = new attackCalc(2);
-  const attackTarget = 90;
   Magician.attack = 100;
-  const attackActual = Magician.attack;
-  expect(attackActual).toEqual(attackTarget);
+  expect(Magician.attack).toEqual(90);
 })
 
 test('attack is calculated according to distance and stoned impact', () => {
