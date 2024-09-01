@@ -5,27 +5,30 @@ export default class attackCalc {
       this.stoned = undefined;
     }
   
-    set stoned(value) {
-      this._stoned = value;
-    }
-  
-    get stoned() {
-      return this._stoned;
-    }
-  
-    get attack() {
-      this._attack = Math.floor(attack * attackLineRatio);
-    }
-  
-    set attack(attack) {
-      let attackLineRatio = 1.1 - 0.1 * this.distance;
-      let attackLogAdj = Math.log2(this.distance) * 5;
-      if (this._stoned) {
-        this._attack = Math.floor((attack * attackLineRatio) - attackLogAdj); 
-      }
-      else {
-        return this._attack;  
-      }
-      return this._attack
-    }
+   
+  set stoned(value) {
+    this.getStoned = value;
   }
+
+  get stoned() {
+    return this.getStoned;
+  }
+
+  set attack(value) {
+    this.basicAttack = value;
+  }
+
+  get attack() {
+    if (this.basicAttack > 0) {
+      if (this.distance > 0) {
+        this.basicAttack = Math.round(this.basicAttack * (1 - (0.1 * (this.distance - 1))));
+
+        if (this.stoned) {
+          this.basicAttack = Math.round(this.basicAttack - Math.log2(this.distance) * 5);
+        }
+      }
+    }
+
+    return this.basicAttack;
+  }
+}
